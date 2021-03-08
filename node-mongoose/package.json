@@ -8,5 +8,8 @@
     "start": "node index"
   },
   "author": "Suraj Choubey",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.11.19"
+  }
 }
