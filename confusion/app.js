@@ -11,11 +11,22 @@ var promoRouter = require('./routes/promoRouter')
 var leaderRouter = require('./routes/leaderRouter')
 
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird')
 
 const Dishes = require('./models/dishes');
 
 const url = 'mongodb://localhost:27017/conFusion';
-const connect = mongoose.connect(url);
+
+const options = {
+  useMongoClient: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
+const connect = mongoose.connect(url, options);
 
 connect.then((db) => {
     console.log("Connected correctly to server");
